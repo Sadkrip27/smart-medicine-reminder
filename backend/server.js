@@ -883,6 +883,40 @@ app.get('/api/dashboard', async (req, res) => {
     });
   }
 });
+/*
+  TEMPORARY DATABASE RESET ENDPOINT
+
+  Remove this route after using it once.
+*/
+app.post('/api/admin/reset-database', async (req, res) => {
+  try {
+    const resetKey = process.env.RESET_KEY;
+
+    if (!resetKey || req.get('x-reset-key') !== resetKey) {
+      return res.status(401).json({
+        error: 'Invalid reset key'
+      });
+    }
+
+    await run('DELETE FROM device_events');
+    await run('DELETE FROM reminder_logs');
+    await run('DELETE FROM schedules');
+    await run('DELETE FROM medicines');
+    await run('DELETE FROM devices');
+
+    res.json({
+      ok: true,
+      message: 'Database cleared successfully'
+    });
+  } catch (e) {
+    console.error('Database reset error:', e);
+
+    res.status(500).json({
+      error: e.message
+    });
+  }
+});
+
 
 /* Serve frontend */
 app.use(
