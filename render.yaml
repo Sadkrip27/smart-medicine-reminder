@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: smart-medicine-reminder
+    runtime: node
+    buildCommand: npm --prefix backend install
+    startCommand: npm --prefix backend start
+    envVars:
+      - key: ESP32_API_KEY
+        sync: false
+      - key: TIMEZONE
+        value: Asia/Kolkata
+      - key: REMINDER_TIMEOUT_MINUTES
+        value: "5"

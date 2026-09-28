@@ -1,0 +1,6 @@
+#define WIFI_SSID "SAD11"
+#define WIFI_PASSWORD "kripal27"
+#define BACKEND_URL "http://10.117.0.183:3000"
+#define ESP32_API_KEY "medicine-demo-2026"
+#define DEVICE_ID "ESP32-MED-001"
+#define FIRMWARE_VERSION "1.0.0"
